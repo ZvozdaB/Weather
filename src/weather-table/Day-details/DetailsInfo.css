@@ -1,0 +1,7 @@
+.ditails__info{
+    width: 30%;
+    display: grid;
+    grid-auto-rows:  30px ;
+    padding-right: 5px;
+    margin-top: 90px;
+}

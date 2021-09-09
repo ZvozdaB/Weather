@@ -8,6 +8,11 @@
     justify-items: center;
     border:solid 1px black;
     padding-bottom: 15px;
+    transition-property: margin;
+    transition-duration: 0.2s;
+}
+.day:hover{
+    margin-top: -10px;
 }
 .day-titel {
     font-size: 20px;
@@ -54,6 +59,7 @@
     position: relative;
     margin-top: -10px;
 }
+
 .day-activ::after{
     position: absolute;
     z-index: 3;

@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 import { getData } from './Api';
 import './App.css';
 import Day from "./weather-table/Day";
-import DayDetails from "./weather-table/Day-details";
+import DayDetails from "./weather-table/DayDetails.js";
 
 
 
 function App() {
       let [weatherDaily, setWeatherDaily] = useState([])
       useEffect(() => { getData().then(resp => setWeatherDaily(resp.daily)) }, [])
-
       let [day, setDay] = useState([
-            { id: 0, activ: true }, 
-            { id: 1, activ: false }, 
-            { id: 2, activ: false }, 
-            { id: 3, activ: false }, 
-            { id: 4, activ: false }
+            { id: 0, activ: true , date:undefined}, 
+            { id: 1, activ: false, date: undefined},
+            { id: 2, activ: false, date: undefined},
+            { id: 3, activ: false, date: undefined},
+            { id: 4, activ: false, date: undefined}
       ])
+      let [activId, setActivId] = useState(0)
+
       
-      let dayData = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця","Субота"]
-      let mounth = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"]
       
       
       
       function makeActiv(id){
+            setActivId(id);
             setDay(day.map(item => {
                   item.activ = (item.id === id) ? true : false;
                   return item
@@ -31,13 +31,10 @@ function App() {
       }
       
       let newDay = day.map((item,index)=>{
-            let date = new Date()
-            date.setDate(date.getDate() + index)
+            day[index].date = weatherDaily[index]?.dt * 1000
             return <Day activ={item.activ}
                         id={item.id}
-                        day={dayData[date.getDay()]} 
-                        date={date.getDate()} 
-                        month={mounth[date.getMonth()]} 
+                        dt={weatherDaily[index]?.dt * 1000} 
                         key={index} 
                         min={weatherDaily[index]?.temp.min} 
                         max={weatherDaily[index]?.temp.max} 
@@ -45,13 +42,12 @@ function App() {
                         makeActiv={makeActiv} />
       })
       
-      
       return (
       <div className="box">
             <div className="day-box">
                     {newDay}
             </div>
-            <DayDetails/>
+            <DayDetails date={day[activId].date}/>
       </div>
   );
 }

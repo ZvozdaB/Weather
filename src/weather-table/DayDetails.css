@@ -1,0 +1,34 @@
+.day-details{
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+    width: 100%;
+    height: 300px;
+    border:solid 1px black;
+    border-top: none;
+    box-shadow: 0 0 10px #000;
+    margin-top: -12px;
+    border-radius: 5px;
+    padding: 15px;
+}
+.details__tables {
+    width: 80%;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+.details__column {
+    width: 25%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 30px;
+    justify-items: center;
+    border-right: 1px solid #000 ;
+}
+.details__column:last-child{
+    border-right: none
+}
+.details__titel {
+    text-align: center;
+    grid-column: 1/3;
+}
