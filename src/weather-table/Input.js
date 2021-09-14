@@ -13,7 +13,7 @@ function Input(props) {
     const handleSelect = async value => {
         const result = await geocodeByAddress(value);
         const latLon = await getLatLng(result[0]);
-        props.setAddress(value);
+        props.setAddress("");
         props.setCity(value)
         props.setCord(latLon);
     }
