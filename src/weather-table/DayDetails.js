@@ -6,8 +6,9 @@ import DetailsInfo from "./Day-details/DetailsInfo";
 
 function DayDetails(props) {
     let [weatherDet, setWeatherDet] = useState([])
-    useEffect(() => { getData(2).then(resp => setWeatherDet(resp.list)) }, [])
-   
+    useEffect(() => { getData(2,props.cord).then(resp => setWeatherDet(resp.list)) }, [props.cord])
+    
+    
     let now = new Date(props.date);
     let UTC = now.getTimezoneOffset() * 60
     let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

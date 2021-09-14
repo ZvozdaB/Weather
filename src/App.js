@@ -3,12 +3,19 @@ import { getData } from './Api';
 import './App.css';
 import Day from "./weather-table/Day";
 import DayDetails from "./weather-table/DayDetails.js";
+import Input from "./weather-table/Input";
 
 
 
 function App() {
       let [weatherDaily, setWeatherDaily] = useState([])
-      useEffect(() => { getData().then(resp => setWeatherDaily(resp.daily)) }, [])
+      let [cord, setCord] = useState({ lat: 49.838261, lng: 24.023239})
+      const [address, setAddress] = useState('');
+      let [city,setCity] = useState('Львів, Львівська область, Україна');
+
+      useEffect(() => { getData(1, cord).then(resp => setWeatherDaily(resp.daily)) }, [cord])
+      
+      
       let [day, setDay] = useState([
             { id: 0, activ: true , date:undefined}, 
             { id: 1, activ: false, date: undefined},
@@ -44,10 +51,12 @@ function App() {
       
       return (
       <div className="box">
+            <Input address={address} setAddress={setAddress} cord={cord} setCord={setCord} setCity={setCity}/>
+                  <div className="city">Погода у<span> {city}</span></div>
             <div className="day-box">
                     {newDay}
             </div>
-            <DayDetails date={day[activId].date}/>
+            <DayDetails date={day[activId].date} cord={cord}/>
       </div>
   );
 }

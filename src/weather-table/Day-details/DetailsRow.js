@@ -19,7 +19,7 @@ function DetailsRow({data}){
                 <div className="row__temp-fils">{(feelsLike !== "NaN°") ? feelsLike : "--" }</div>
                 <div>{humidity || "--"}</div>
                 <div>{wind || "--"}</div>
-                <div>{(pop >= 0) ? pop * 100 : "--"}</div>
+            <div>{(pop >= 0) ? Math.round(pop * 100)  : "--"}</div>
             </div>
             
     )
